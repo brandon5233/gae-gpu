@@ -1,0 +1,187 @@
+
+<html>
+	<head>
+    
+		<meta charset="utf-8">
+    
+		<title>DisplayPage</title>
+    
+    
+		<style type="text/css">
+    
+    
+body {
+      
+color:#000000;
+      
+background-color:#ffd9b3;
+     
+margin:0px;
+font-size: 14px;
+}
+    
+
+.navbar {
+    background-color: black;
+    overflow: hidden;
+}
+
+.navbar a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+
+.navbar a:hover {
+    background-color: #ff9933;
+    color: black;
+}
+
+
+.navbar a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+table{
+width:30%;
+height:auto;
+text-align:center;
+margin-top:5%;
+border:2px solid white;
+}
+
+.th{
+color:red;
+font-face:bold;
+border: 2px  solid white;
+
+}
+
+.td{
+border: 2px solid white;
+
+}
+
+.button{
+color:white;
+background-color:#ff9933;
+width:100%;
+padding:2px;
+
+}
+
+.button:hover{
+color:#ff9933;
+background-color: white
+}
+
+.submitbutton{
+background:none;
+border:none;
+text-decoration:underline;
+
+}
+
+.submitbutton:hover, .sortbutton:hover{
+cursor : pointer;
+}
+
+.sort{
+float:right;
+margin-right:10px;
+font-weight:bold;
+}
+
+.sortbutton{
+background:none;
+border:none;
+text-decoration:none;
+color:red;
+font-weight:bold;
+}
+
+img{
+max-width:20px;
+max-height:20px;}
+
+
+
+		</style>
+    
+  
+	</head>
+ 
+        <body>
+
+  		<div class="navbar">
+
+			 <a href="/displaygpu">HOME</a>
+			 <a href="/addgpu">Add GPU</a>
+
+			 <a href="/query">QUERY</a>
+			 <a href={{logout}}> LOGOUT</a>
+		</div>
+  
+	<form method="post" action="/displaygpu" id="sortform">
+
+		<table align="center">
+
+  			<tr>
+			<th class="th">GPU Name
+				<div class="sort">
+					<button class="sortbutton" onClick="changesort();" value="{{idsort}}" name="idsortorder">
+						{% if idsort=="asc" %} <img src="asc.png"/>
+						{%else%} <img src = "desc.png"/>
+						{%endif%}
+					</button>
+				</div> 
+			</th>	
+
+			</form>
+
+			<th class="th">edit</th>
+			</tr>
+
+			{%for x in allgpu %}
+  
+				<tr> 
+				<td class="td"> 
+				<form method="post" action="/displayeach" id="myform">
+				<input type="submit" name="name" value="{{x.key.id()}}" class="submitbutton" />
+				</form>
+					
+				</td>
+
+				
+
+				<td class="td">			
+				<form method="post" action="/editgpu">
+				<input type="hidden" name="name" value="{{x.key.id()}}"/>
+				<input class="button" type="submit" name="button" value="edit" />
+				</form>
+				
+				</td>
+				
+				</tr>
+  
+			{% endfor %}
+  
+		</table>
+  
+
+<h5 style="margin-top:15%" align="center">*Note: if changes do not reflect immediately, please refresh the page</h5>
+
+	<script>
+	function changesort(){
+	document.getElementById("sortform").submit();	
+	}
+
+	</script>
+	</body>
+
+</html>

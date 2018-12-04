@@ -1,0 +1,157 @@
+
+
+<html>
+	<head>
+    
+		<meta charset="utf-8">
+    
+		<title>DisplayPage</title>
+    
+    
+		<style type="text/css">
+    
+    
+body {
+      
+color:#000000;
+      
+background-color:#ffd9b3;
+     
+margin:0px;
+font-size: 14px;
+min-height:100%;
+}
+    
+
+.navbar {
+    background-color: black;
+    overflow: hidden;
+    margin:0px;
+}
+
+.navbar a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+
+.navbar a:hover {
+    background-color: #ff9933;
+    color: black;
+}
+
+
+.navbar a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+table{
+text-align:center;
+margin-top:3%;
+border:2px solid white;
+
+}
+
+.th{
+color:blue;
+font-face:bold;
+border: 2px  solid white;
+background-color:#ffd9b3;
+
+
+}
+
+.td{
+border: 2px solid white;
+padding:5px;
+background-color:#ffd9b3;
+}
+
+.button{
+color:white;
+background-color:#ff9933;
+width:100%;
+height:155%
+border:2px solid #ddd;
+
+}
+
+.button:hover{
+color:#ff9933;
+background-color: white
+}
+
+.error{
+color : red;
+text-align:center;
+}
+	</style>
+    
+  
+</head>
+ 
+
+        <body>
+
+  		<div class="navbar">
+
+			 <a href="/displaygpu">HOME</a>
+			 <a href="/addgpu">Add GPU</a>
+
+       			 <a href="/query">QUERY</a>
+			 <a href={{logout}}> LOGOUT</a>
+		</div>
+
+
+	<form method="post" action="/query">
+		<table align="center">
+			{%for feature in featurelist %}
+  
+			<tr> 
+			<td class="td" align="right">{{feature}}</td>
+			<td class="td" align="left"> <input type="checkbox" name="{{feature}}" value="True"></td>
+			</tr>
+  
+			{% endfor %}
+  
+			<tr><td><input type="submit" class="button" value="SEARCH"></td>
+			
+			<td><input type="button" class="button" onClick="goback()" value="BACK"></td></tr>
+			
+		</table>
+  
+
+<p>
+	{% if notempty==True %}
+	<h2 class="error" style="text-decoration:underline"> Results: </h2>
+	<table class="table" align="center">
+	{% for x in relevantgpu %}
+	<tr class="tr">
+		<td class="td">{{x.key.id()}}</td>
+		</tr>
+	{% endfor %}
+	</table>
+
+	{% elif notempty=="wait" %}
+	
+	{% else %}
+	<h2 class="error"> Sorry no GPUs match your description... </h2>
+	{% endif %}
+</p>
+</form>
+	<script>
+	function goback(){
+	location.href="/displaygpu";
+	}  
+	</script>
+
+	
+
+
+</body>
+</html>

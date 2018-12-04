@@ -1,0 +1,139 @@
+<html>
+<head>
+<title>Adding GPU</title>
+<meta charset="utf-8">
+<style>
+
+body {
+margin:0;padding:0; 
+width:100%;
+height:100%;
+background-color:#ffd9b3	
+}
+.navbar {
+    background-color: black;
+    overflow: hidden;
+}
+
+.navbar a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+
+.navbar a:hover {
+    background-color: #ff9933;
+    color: black;
+}
+
+
+.navbar a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.maintext{
+margin-top: 10%; 
+vertical-align: baseline
+}
+
+::placeholder {
+text-align:center;
+opacity:1;
+}
+
+.button{
+    background-color: #ff8000; 
+    border: none;
+    color: white;
+    padding: 7px 30px;
+    text-align: center;
+    display: inline-block;
+    font-weight:bold;
+    margin-top:1%;
+    
+}
+
+.button:hover{
+    background-color: white; 
+    border: none;
+    color: #ff8000;
+    padding: 7px 30px;
+    text-align: center;
+    display: inline-block;
+    font-weight:bold;
+}
+
+#header{
+color:#ff8000;
+text-decoration:underline;
+font-family:serif
+font-weight:bold;
+
+}
+
+
+@keyframes errormessage {
+    0% { transform: translate(20px); }
+   5% { transform: translate(-20px);}
+   10% { transform: translate(20px); }
+   15% { transform: translate(-20px); }
+    20% { transform: translate(20px); }
+   25% { transform: translate(-20px);}
+   30% { transform: translate(20px); }
+   35% { transform: translate(-20px); }
+    40% { transform: translate(20px); }
+   45% { transform: translate(-20px);}
+   50% { transform: translate(20px); }
+   100%{ transform: translate(0px);}
+}
+
+
+.errormessage{
+color:red;
+animation: errormessage 1s 1;
+}
+
+</style>
+</head>
+<body>
+<div class="navbar">
+    <a href="/displaygpu">HOME</a>
+    <a href="/addgpu">Add GPU</a>
+    <a href="/query">QUERY</a>
+    <a href={{logout}}>LOGOUT</a>
+</div>
+
+<div align="center" class="maintext">
+
+<h3 id="header">ADD a GPU by filling in the required fields </h3>
+
+<table align="center">
+<form method="post" action="/addgpu">
+<tr>
+<td class="textlabel" align="right"> GPU Name:</td>
+<td> <input type="text" name="name" placeholder="unique gpu name" onfocus="this.placeholder = ''" 
+onblur="this.placeholder = 'unique gpu name'" required /></td>
+</tr>
+{% for x in featurelist %}
+<tr>
+	<td  align="right">{{x}}:</td>
+	<td><select name="{{x}}"><option value="True">True</option><option value="False">False</option></td>
+	
+</tr>
+{% endfor %}
+</table>
+<input type="submit" name="button" value="add" class="button"/>
+</form>
+<input type="submit" class="button" value="Cancel" onClick="location.href='/displaygpu'" />
+<p ><h2 class="errormessage">{{error}}</h2></p>
+
+
+</div>
+
+</body>
+</html>
